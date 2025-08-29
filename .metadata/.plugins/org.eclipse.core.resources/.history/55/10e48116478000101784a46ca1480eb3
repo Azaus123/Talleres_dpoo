@@ -1,0 +1,43 @@
+package sitp;
+
+public class Prueba_2 {
+
+	public static void main(String[] args) {
+
+		int[] arregloEnteros = { 1, 2, 3, 4 };
+		// Insertion sort
+		// Comparar al primero con el segundo
+		int i = 0;
+		int j = 1;
+
+		// Se va a ejecutar solo cuando i<j y cuando j<tamanio
+		while (j < arregloEnteros.length) {
+			// obtenemos los elementos i y los elementos j
+			int elemento_i = arregloEnteros[i];
+			int elemento_j = arregloEnteros[j];
+
+			// En caso que el i sea mayor al j, toca cambiarlo y asi sucesivamente
+			// Para esto, tenemos unos cambiadores
+			int cambiador_i = i;
+			int cambiador_j = j;
+			while (elemento_i > elemento_j && cambiador_i > 0) {
+				// Hacemos swap
+				int guardar = arregloEnteros[cambiador_i];
+				arregloEnteros[cambiador_i] = arregloEnteros[cambiador_j];
+				arregloEnteros[j] = guardar;
+				// Ya no comparamos al tercero con el segundo sino el segundo (modificado) con
+				// el primero
+				cambiador_j--;
+				cambiador_i--;
+				elemento_i = arregloEnteros[cambiador_i];
+				elemento_j = arregloEnteros[cambiador_j];
+
+			}
+			i++;
+			j++;
+		}
+		System.out.println(arregloEnteros.toString());
+
+	}
+
+}

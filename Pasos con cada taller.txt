@@ -1,0 +1,18 @@
+Abre una terminal (Git Bash o CMD) y ve a la carpeta de tu proyecto:
+cd C:\Users\mvare\eclipse-workspace\nTaller1_Gasolinera
+
+Inicializa el repositorio en esa carpeta:
+git init
+
+Agrega todos los archivos al área de preparación:
+git add .
+
+Haz el primer commit:
+git commit -m "Versión inicial del proyecto"
+
+Conecta tu repositorio local con el de GitHub (reemplaza la URL con la tuya):
+git remote add origin https://github.com/Azaus123/Taller1_dpoo.git
+
+Sube los cambios a GitHub (en la rama main):
+git branch -M main
+git push -u origin main

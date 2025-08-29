@@ -1,0 +1,28 @@
+package sitp;
+
+public class ParejaMaravilla <A,B extends Conductor> { //van a tener esos A,B genéricos, sin definir, para que venga alguien y ponga lo que quiera
+	private B derecha; //Tendra algo de tipo izquierda
+	private A izquierda; //Algo de tipo derecha
+	//Cuando lo cree, ya se dirá qué es
+	public ParejaMaravilla(A izq, B der) {
+		izquierda = izq;
+		derecha = der;
+	}
+	public B getDerecha() {
+		return derecha;
+	}
+	public void setDerecha(B derecha) {
+		this.derecha = derecha;
+	}
+	public A getIzquierda() {
+		return izquierda;
+	}
+	public void setIzquierda(A izquierda) {
+		this.izquierda = izquierda;
+	}
+	//Podemos hacer override
+	@Override
+	public String toString() {
+		return izquierda.toString();
+	}
+}

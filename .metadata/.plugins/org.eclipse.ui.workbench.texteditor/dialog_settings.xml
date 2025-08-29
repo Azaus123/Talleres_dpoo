@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="reini"/>
+			<item value="agregar"/>
+			<item value="volver"/>
+			<item value="canidad"/>
+			<item value="map"/>
+			<item value="cantidadcadenas"/>
+			<item value="cantidad"/>
+			<item value="comparar"/>
+			<item value="vacio"/>
+			<item value="reiniciar"/>
+			<item value="repetid"/>
+			<item value="verificar"/>
+			<item value="pintar"/>
+			<item value="darAlto"/>
+			<item value="array"/>
+		</list>
+	</section>
+</section>

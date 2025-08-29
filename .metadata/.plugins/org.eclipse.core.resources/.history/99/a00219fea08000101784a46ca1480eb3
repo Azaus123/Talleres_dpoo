@@ -1,0 +1,734 @@
+package uniandes.dpoo.estructuras.logica;
+
+import java.util.HashMap;
+
+/**
+ * Esta clase tiene un conjunto de métodos para practicar operaciones sobre arreglos de enteros y de cadenas.
+ *
+ * Todos los métodos deben operar sobre los atributos arregloEnteros y arregloCadenas.
+ * 
+ * No pueden agregarse nuevos atributos.
+ * 
+ * Implemente los métodos usando operaciones sobre arreglos (ie., no haga cosas como construir listas para evitar la manipulación de arreglos).
+ */
+public class SandboxArreglos
+{
+    /**
+     * Un arreglo de enteros para realizar varias de las siguientes operaciones.
+     * 
+     * Ninguna posición del arreglo puede estar vacía en ningún momento.
+     */
+    private int[] arregloEnteros; //Primer atributo
+
+    /**
+     * Un arreglo de cadenas para realizar varias de las siguientes operaciones
+     * 
+     * Ninguna posición del arreglo puede estar vacía en ningún momento.
+     */
+    private String[] arregloCadenas; //Segundo atributo
+
+    /**
+     * Crea una nueva instancia de la clase con los dos arreglos inicializados pero vacíos (tamaño 0)
+     */
+    public SandboxArreglos( )
+    {
+        arregloEnteros = new int[]{};
+        arregloCadenas = new String[]{};
+    }
+
+    /**
+     * Retorna una copia del arreglo de enteros, es decir un nuevo arreglo del mismo tamaño que contiene copias de los valores del arreglo original
+     * @return Una copia del arreglo de enteros
+     */
+    public int[] getCopiaEnteros( )
+    {
+        return arregloEnteros; //Primer cambio
+    }
+
+    /**
+     * Retorna una copia del arreglo de cadenas, es decir un nuevo arreglo del mismo tamaño que contiene copias de los valores del arreglo original
+     * @return Una copia del arreglo de cadenas
+     */
+    public String[] getCopiaCadenas( )
+    {
+        return arregloCadenas; //Segundo cambio
+    }
+
+    /**
+     * Retorna la cantidad de valores en el arreglo de enteros
+     * @return
+     */
+    public int getCantidadEnteros( )
+    {
+        return arregloEnteros.length; //Tercer cambio
+    }
+
+    /**
+     * Retorna la cantidad de valores en el arreglo de cadenas
+     * @return
+     */
+    public int getCantidadCadenas( )
+    {
+        return arregloCadenas.length; //Cuarto cambio
+    }
+
+    /**
+     * Agrega un nuevo valor al final del arreglo. Es decir que este método siempre debería aumentar en 1 la capacidad del arreglo.
+     * 
+     * @param entero El valor que se va a agregar.
+     */
+    public void agregarEntero( int entero )
+    {
+    	//En java, no se puede agregar un elemento asi como asi. Toca crear uno nuevo, de tamaño +1 y copiar
+    	int tamanio_original = arregloEnteros.length; //tipo de dato, nombre, valor y los ;
+    	int[] nuevo_arreglo = new int[tamanio_original +1]; //Creamos una lista vacia de tamaño mayor a 1 de la anterior
+    	
+    	//Ahora toca copiar los elementos
+    	for(int i = 0; i<tamanio_original; i++) {
+    		nuevo_arreglo[i] = arregloEnteros[i]; //Copiamos los elementos
+    	}
+    	
+    	//Asignar a la ultima posicion el nuevo elemento
+    	nuevo_arreglo[tamanio_original] = entero;
+    	
+    	//Modificamos a la variable con la nueva lista
+    	arregloEnteros = nuevo_arreglo;
+
+    }
+
+    /**
+     * Agrega un nuevo valor al final del arreglo. Es decir que este método siempre debería aumentar en 1 la capacidad del arreglo.
+     * 
+     * @param cadena La cadena que se va a agregar.
+     */
+    public void agregarCadena( String cadena )
+    {
+    	//Obtener el tamaño
+    	int tamanio_original = arregloCadenas.length;
+    	//Crear una lista mas grande
+    	String[] nueva_cadena = new String[tamanio_original +1];
+    	
+    	//Copiar elementos
+    	for(int i = 0; i<tamanio_original; i++) {
+    		nueva_cadena[i] = arregloCadenas[i];
+    	}
+    	
+    	//Agregar ultimo elemento
+    	nueva_cadena[tamanio_original] = cadena;
+    	
+    	//Hacer efectivo el cambio
+    	arregloCadenas = nueva_cadena;
+
+    }
+
+    /**
+     * Elimina todas las apariciones de un determinado valor dentro del arreglo de enteros
+     * @param valor El valor que se va eliminar
+     */
+    public void eliminarEntero( int valor )
+    {
+    	//Obtener el tamaño original
+    	int tamanio_original = arregloEnteros.length;
+    	//Crear una nueva lista de tamaño original (el peor caso es que no eliminemos ninguno)
+    	int[] nueva_lista = new int[tamanio_original];
+    	
+    	//Copiar todos los elementos que NO sean el mismo que el valor
+    	int contador = 0; //creamos un contador de la cantidad de elementos copiados
+    	for(int i = 0; i<tamanio_original;i++) {
+    		int elemento = arregloEnteros[i];
+    		if (elemento != valor) {
+    			nueva_lista[contador] = elemento; //Debe ser contador pues habra ocasiones donde el i avance (digamos no se meten los primeros 5) pero el contador debe ser 1 (ya que apenas vamos a ingresar el sexto)
+    			contador++; //Aumentamos en 1 el contador
+    		}
+    	}
+    	
+    	//Eliminar los espacio vacios: nueva_lista tiene en espacios vacios donde iban los elementos eliminados
+    	int[] lista_final = new int[contador];
+    	
+    	//Ultima copiar
+    	for(int i = 0; i<contador;i++) {
+    		lista_final[i] = nueva_lista[i];
+    	}
+    	arregloEnteros = lista_final; //hacemos el cambio de la variable
+    }
+
+    /**
+     * Elimina todas las apariciones de un determinado valor dentro del arreglo de cadenas
+     * @param cadena La cadena que se va eliminar
+     */
+    public void eliminarCadena( String cadena )
+    {
+    	//PASO 1: Crear una copia de igual tamaño que la original (no se elimino a ningun elemento)
+    	int tamanio = arregloCadenas.length;
+    	String[] nueva_lista = new String[tamanio];
+    	
+    	//PASO 2:Copiar solo los elementos que sean distintos a cadena
+    	int contador = 0;
+    	for(int i = 0; i<tamanio;i++) {
+    		String elemento = arregloCadenas[i];
+    		if (!elemento.equals(cadena)) { //El opuesto de .equals es !.equals
+    			nueva_lista[contador] = elemento;  //Solo se agrega al elemento cuando sea distinto
+    			contador++;
+    		}
+    	}
+    	//PASO 3: Copiar la nueva_lista solo que sin vacios
+    	String[] lista_final = new String[contador];
+    	for(int i = 0; i<contador; i++) {
+    		lista_final[i] = nueva_lista[i];
+    	}
+    	
+    	//PASO 4: Cambiar el valor de la variable
+    	arregloCadenas = lista_final;
+    }
+
+    /**
+     * Inserta un nuevo entero en el arreglo de enteros.
+     * 
+     * @param entero El nuevo valor que debe agregarse
+     * @param posicion La posición donde debe quedar el nuevo valor en el arreglo aumentado. Si la posición es menor a 0, se inserta el valor en la primera posición. Si la
+     *        posición es mayor que el tamaño del arreglo, se inserta el valor en la última posición.
+     */
+    public void insertarEntero( int entero, int posicion )
+    {
+    	//PASO 1: Crear una nueva lista más grande
+    	int tamanio_original = arregloEnteros.length;
+    	int[] nueva_lista = new int[tamanio_original+1];
+    	
+    	//clasificar si se pone en la posicion inicial (negativo), posicion real o posicion final (mayor al tamaño)
+    	if (posicion<0) {
+    		posicion = 0;
+    	}
+    	else if(posicion>tamanio_original) {
+    		posicion = tamanio_original;
+    	}
+    	
+    	//PASO 2: Agregar elementos a nueva_lista
+    	for(int i = 0; i<=tamanio_original;i++) {
+    		if (i == posicion) { //si encontramos la posicion donde meter al elemento
+    			nueva_lista[posicion] = entero;  //se mete al elemento
+    		}
+    		else {
+    			nueva_lista[i] = arregloEnteros[i];
+    		}
+    	} 		
+    	//PASO 4: Modificar la variable arregloEnteros con nueva_lista
+    	arregloEnteros = nueva_lista;
+    }
+
+    /**
+     * Elimina un valor del arreglo de enteros dada su posición.
+     * @param posicion La posición donde está el elemento que debe ser eliminado. Si el parámetro posicion no corresponde a ninguna posición del arreglo de enteros, el método
+     *        no debe hacer nada.
+     */
+    public void eliminarEnteroPorPosicion( int posicion )
+    {
+    	//Hallar el tamaño del arreglo original
+    	int tamanio = arregloEnteros.length;
+    	//Filtrar si se debe o no hacer algo
+    	if (0 <= posicion && posicion <= (tamanio - 1)){ //doble comparacion
+    	//Creamos una nueva lista con un tamaño menor pues sí o sí debemos quitar un elemento
+    	int[] nueva_lista = new int[tamanio-1]; //vamos a quitarle una posicion
+    	
+    	//Creamos un contador para añadir elementos en orden
+    	int contador = 0;
+    	//Recorremos todas las posiciones de la lista original [0,tamanio)
+    	for(int i = 0; i<(tamanio);i++) {
+    		if(contador != posicion) { //Solo agregamos el elemento a la nueva_lista cuando sea distinto
+    			nueva_lista[contador] = arregloEnteros[i];
+    			contador++;
+    		}
+    	}
+    	arregloEnteros = nueva_lista;
+    	}
+
+    }
+
+    /**
+     * Reinicia el arreglo de enteros con los valores contenidos en el arreglo del parámetro 'valores' truncados.
+     * 
+     * Es decir que si el valor fuera 3.67, en el nuevo arreglo de enteros debería quedar el entero 3.
+     * @param valores Un arreglo de valores decimales.
+     */
+    public void reiniciarArregloEnteros( double[] valores )
+    {
+    	int tamanio = valores.length;
+    	int[] nueva_lista = new int[tamanio];
+    	
+    	//Utilizar en vez for, while para probar 
+    	int i = 0;
+    	while(i<tamanio) {
+    		nueva_lista[i] = (int) valores[i]; //truncamos, es decir solo tomamos la parte entera del elemento i de valores. Es un cast.
+    		i++;
+    	}
+    	//Ultimo, cambiar a la variable arreglo enteros
+    	arregloEnteros = nueva_lista;
+
+    }
+
+    /**
+     * Reinicia el arreglo de cadenas con las representaciones como Strings de los objetos contenidos en el arreglo del parámetro 'objetos'.
+     * 
+     * Use el método toString para convertir los objetos a cadenas.
+     * @param valores Un arreglo de objetos
+     */
+    public void reiniciarArregloCadenas( Object[] objetos )
+    {
+    	int tamanio = objetos.length;
+    	String[] nueva_lista = new String[tamanio];
+    	
+    	int i = 0;
+    	while(i<tamanio) {
+    		nueva_lista[i] = objetos[i].toString(); //utilizamos .toString para convertir a String lo que sea que haya en objetos
+    		i++;
+    	}
+    	//Hacer efectivo el cambio
+    	arregloCadenas = nueva_lista;
+
+    }
+
+    /**
+     * Modifica el arreglo de enteros para que todos los valores sean positivos.
+     * 
+     * Es decir que si en una posición había un valor negativo, después de ejecutar el método debe quedar el mismo valor muliplicado por -1.
+     */
+    public void volverPositivos( )
+    {
+    	int tamanio = arregloEnteros.length;
+    	int[] nueva_lista = new int[tamanio];
+    	
+    	//Podemos hacerlo con Math.abs()
+    	int i = 0;
+    	while(i<tamanio) {
+    		nueva_lista[i] = Math.abs(arregloEnteros[i]);
+    	}
+    	//Hacemos efectivo el cambio
+    	arregloEnteros = nueva_lista;
+    	
+    	
+    	//Tambien podriamos por nosotros mismos:, pero se deja el abs porque usa libreria
+    	/*int i = 0;
+    	while(i<tamanio) {
+    		int elemento = arregloEnteros[i];
+    		if (elemento<0) {
+    			elemento = elemento*(-1);
+    		}
+    		nueva_lista[i] = elemento;
+    	}
+    	arregloEnteros = nueva_lista;
+    	*/
+
+    }
+
+    /**
+     * Modifica el arreglo de enteros para que todos los valores queden organizados de menor a mayor.
+     */
+    public void organizarEnteros( )
+	{
+/*		// Insertion sort: Esta es la version que me acordaba y hecha por mi :)
+		// Comparar al primero con el segundo
+		int i = 0;
+		int j = 1;
+
+		// Se va a ejecutar solo cuando i<j y cuando j<tamanio
+		while (j < arregloEnteros.length) {
+			// obtenemos los elementos i y los elementos j
+			int elemento_i = arregloEnteros[i];
+			int elemento_j = arregloEnteros[j];
+
+			// En caso que el i sea mayor al j, toca cambiarlo y asi sucesivamente
+			// Para esto, tenemos unos cambiadores
+			int cambiador_i = i;
+			int cambiador_j = j;
+			while (elemento_i > elemento_j && cambiador_i >= 0) {
+				// Hacemos swap
+				int guardar = arregloEnteros[cambiador_i];
+				arregloEnteros[cambiador_i] = arregloEnteros[cambiador_j];
+				arregloEnteros[cambiador_j] = guardar;
+				// Ya no comparamos al tercero con el segundo sino el segundo (modificado) con
+				// el primero
+				cambiador_j--;
+				
+				//No aseguramos que no lleguemos a la posicion -1
+				if (cambiador_i != 0) {
+					cambiador_i--;
+				}
+				elemento_i = arregloEnteros[cambiador_i];
+				elemento_j = arregloEnteros[cambiador_j];
+
+			}
+			i++;
+			j++;
+		}
+*/
+    	//Ahora pongamos la version estandar que utiliza un for y un while
+    	//empezamos en 1 para comparar j con i
+    	for(int j = 1; j<arregloEnteros.length; j++) {
+    		int i = j-1; //anterior al actual
+    		int valor_presente = arregloEnteros[j]; //actual
+    		
+    		//Vamos a correr todos a la derecha
+    		//Mientras que el anterior (i) sea mayor a 0, y hasta que el anterior sea mayor al presente (o sea que toca arreglarlo y hacerle swap)
+    		while(i>= 0 && arregloEnteros[i]> valor_presente) {
+    			//El actual debe ser igual al anterior para que el actual sea mayor al anterior y quede ordenado
+    			arregloEnteros[i+1] = arregloEnteros[i]; //Lo movemos a la derecha
+    			
+    			//Pasamos al anterior del anterior
+    			i--;
+    		}
+    		//En la posicion donde se deje de cumplir el ciclo significa que ahora el valor_presente > arregloEnteros[i]
+    		//Por tanto, debe insertarse en la posición i+1
+    		arregloEnteros[i+1] = valor_presente;
+    	}
+    	
+	}
+
+    /**
+     * Modifica el arreglo de cadenas para que todos los valores queden organizados lexicográficamente.
+     */
+    public void organizarCadenas( )
+    {
+    	//Utilizamos selection sort para comparar podemos usar c1.compareTo(c2)
+    	//Devuelve un entero: si es negativo, c1 < c2
+    	//Devuelve un entero: si es 0, c1 = c2
+    	//Devuelve un entero: si es positivo, c1> c2
+    	
+    	//Paso 1. Encontrar al elemento mas pequeño
+    	int tamanio = arregloCadenas.length;
+    	for(int i = 0; i<tamanio -1; i++) { //El ultimo swap se hace con el penultimo, tamanio-2
+    		int indice_minimo = i;
+    		for(int j = i+1; j<tamanio;j++ ) { //Empezamos a comparar desde el siguiente a i
+    			String elemento_j = arregloCadenas[j];
+    			int comparar = arregloCadenas[indice_minimo].compareTo(elemento_j); //comparamos el i con el j
+    			
+    			//Si elemento i es mayor al elemento j, ahora el elemento i tiene el valor del elemento j
+    			//Y toca hacer swap
+    			if(comparar > 0) {		
+    			    indice_minimo = j; //actualizamos el valor del indice minimo
+    			}
+    		}
+    		//Hacemos swap una vez ya encontramos el minimo
+    		String guardar = arregloCadenas[i]; //guardamos donde estamos ahorita
+    		arregloCadenas[i] = arregloCadenas[indice_minimo]; //en la posicion i, ya no debe ir el que estaba sino el del indice minimo
+    		arregloCadenas[indice_minimo] = guardar;
+    	}
+    	
+
+    }
+
+    /**
+     * Cuenta cuántas veces aparece el valor recibido por parámetro en el arreglo de enteros
+     * @param valor El valor buscado
+     * @return La cantidad de veces que aparece el valor
+     */
+    public int contarApariciones( int valor )
+    {
+    	int veces = 0;
+    	for(int i = 0;i<arregloEnteros.length;i++) {
+    		if (arregloEnteros[i] == valor) {
+    			veces++;
+    		}
+    	}
+        return veces;
+    }
+
+    /**
+     * Cuenta cuántas veces aparece la cadena recibida por parámetro en el arreglo de cadenas.
+     * 
+     * La búsqueda no debe diferenciar entre mayúsculas y minúsculas.
+     * @param cadena La cadena buscada
+     * @return La cantidad de veces que aparece la cadena
+     */
+    public int contarApariciones( String cadena )
+    {
+    	int cantidad = 0;
+    	for(int i = 0; i<arregloCadenas.length; i++) {
+    		if (cadena.toLowerCase().equals(arregloCadenas[i].toLowerCase())) { //Debe ser .equals para Strings, no debe ser ==
+    			cantidad++;
+    		}
+    	}
+        return cantidad;
+    }
+
+    /**
+     * Busca en qué posiciones del arreglo de enteros se encuentra el valor que se recibe en el parámetro
+     * @param valor El valor que se debe buscar
+     * @return Un arreglo con los números de las posiciones del arreglo de enteros en las que se encuentra el valor buscado. Si el valor no se encuentra, el arreglo retornado
+     *         es de tamaño 0.
+     */
+    public int[] buscarEntero( int valor )
+    {
+    	int tamanio = arregloEnteros.length;
+    	int[] nueva_lista = new int[tamanio];
+    	int contador = 0;
+    	
+    	//Recorremos toda la lista de enteros
+    	for(int i = 0; i<tamanio; i++) {
+    		if (valor == arregloEnteros[i]) { //Si algun elemento coincide con el valor
+    			nueva_lista[contador] = arregloEnteros[i]; //Los agregamos a la nueva lista bajo el indice de contador
+    			contador++; //Aumentamos contador
+    		}
+    	}
+    	
+    	//Sabe si debemos entregar una lista de tamaño 0 o agregar los elementos
+    	int[] lista_final = new int[contador];
+    	int i = 0;
+    	while(i<contador) {
+    		lista_final[i] = nueva_lista[i];
+    		i++;
+    	}
+        return lista_final;
+    }
+
+    /**
+     * Calcula cuál es el rango de los enteros (el valor mínimo y el máximo).
+     * @return Un arreglo con dos posiciones: en la primera posición, debe estar el valor mínimo en el arreglo de enteros; en la segunda posición, debe estar el valor máximo
+     *         en el arreglo de enteros. Si el arreglo está vacío, debe retornar un arreglo vacío.
+     */
+    public int[] calcularRangoEnteros( )
+    {
+    	int tamanio = arregloEnteros.length;
+    	int[] nueva_lista = new int[0]; //suponemos que es vacio, en caso que el tamaño sea 0
+    
+    	if (tamanio > 1) { //en caso que sea de tamaño mayor a 1
+    		nueva_lista = new int[2]; 
+    		int maximo = arregloEnteros[0];
+    		int minimo = arregloEnteros[0];
+    		for(int i = 0; i<tamanio;i++) {
+    			int elemento = arregloEnteros[i];
+    			if (elemento > maximo) {
+    				maximo = elemento;
+    			}
+    			if (elemento< minimo) {
+    				minimo = elemento;
+    			}
+    		}
+    		nueva_lista[0] = minimo;
+    		nueva_lista[1] = maximo;
+    		
+    	} else if (tamanio == 1) { //en caso que sea tamaño exactamente mayor a 1
+    		nueva_lista = new int[2];
+    		nueva_lista[0] = arregloEnteros[0];
+    		nueva_lista[1] = arregloEnteros[0];
+    	}
+        return nueva_lista;
+    }
+
+    /**
+     * Calcula un histograma de los valores del arreglo de enteros y lo devuelve como un mapa donde las llaves son los valores del arreglo y los valores son la cantidad de
+     * veces que aparece cada uno en el arreglo de enteros.
+     * @return Un mapa con el histograma de valores.
+     */
+    public HashMap<Integer, Integer> calcularHistograma( )
+    {
+    	//llaves valores,valores cantidad que aparece
+    	//PASO 1: Creamos el mapa
+    	HashMap<Integer, Integer> mapa = new HashMap<>();
+    	int tamanio = arregloEnteros.length;
+    	
+    	//PASO 2: ingresar elementos al mapa
+    	//Para ingresar elementos al mapa utilizamos: mapa.put(<key>, <value>) 
+    	//Para obtener un valor podemos hacer: mapa.getOrDefault(<key>, <valor si no la encontramos>);
+    	//Para saber si una llave existe: mapa.containsKey(<key>)
+    	for(int i = 0; i<tamanio;i++) {
+    		int elemento = arregloEnteros[i];
+    		
+    		//Saber si ya existe llave
+    		if(mapa.containsKey(elemento)) { //Si ya existe la llave
+    			int valor_asociado_anterior = mapa.getOrDefault(elemento,0); //obtenemos el valor anterior
+    			mapa.put(elemento, 1 + valor_asociado_anterior); //Ahora el valor asociado va a ser 1 + el valor anterior
+    		}else { //Si no existe la llave
+    			mapa.put(elemento,1); //La creamos con el valor 1
+    		}
+    	}
+    	
+        return mapa;
+    }
+
+    /**
+     * Cuenta cuántos valores dentro del arreglo de enteros están repetidos.
+     * @return La cantidad de enteos diferentes que aparecen más de una vez
+     */
+    public int contarEnterosRepetidos( )
+    {
+    	int tamanio = arregloEnteros.length;
+    	int cantidad = 0;
+    	int[] lista_con_distintos = new int[tamanio];
+    	
+    	//Paso 1: Crear una lista con elementos distintos
+    	for(int i = 0; i<tamanio; i++) {
+    		int elemento = arregloEnteros[i]; //tomamos al elemento i
+    		//¿Ya esta el elemento dentro de la lista de distintos?
+    		
+    		boolean encontrado = false; //suponemos que no lo hemos encontrado
+    		int j = 0; //creamos una variable j para recorrer la lista de distintos
+    		while(j<cantidad && encontrado == false) { //mientras que j sea menor a la cantidad de distintos y encontrado siga siendo Falso
+    			int elemento_duplicado = lista_con_distintos[j]; //obtenemos al elemento en la posicion j
+    			if(elemento == elemento_duplicado) { //en caso que sí exista
+    				encontrado = true; //nos salimos del ciclo
+    			}
+    			j++;
+    		}
+    		//Saber si agregar o no a la lista de elemento
+    		if (encontrado == false) { //No encontro al elemento en la lista
+    			lista_con_distintos[cantidad] = elemento; //agregamos al elemento a la lista de distintos
+    			cantidad++; //aumentamos la cantidad
+    		}
+    	}
+    	//Paso 2: Contar cuántos números se repiten
+    	//Crear una lista limpia
+    	int[] lista_unica = new int[cantidad];
+    	for(int i = 0; i<cantidad; i++) {
+    		lista_unica[i] = lista_con_distintos[i];
+    	}
+    	//Contar cuantos se repiten
+    	int cantidad_repetidos = 0;
+    	for(int i = 0; i<lista_unica.length; i++) {
+    		int elemento_unico = lista_unica[i];
+    		//saber si el elemento unico se repite mas de 1 vez
+    		int veces_repetido_elemento_unico = 0;
+    		int j = 0;
+    		while(j<tamanio && veces_repetido_elemento_unico <2) { //si aparece 2 veces, ya es repetido
+    			int elemento_j = arregloEnteros[j];
+    			if (elemento_j == elemento_unico) {
+    				veces_repetido_elemento_unico++;
+    			}
+    			j++;
+    		}
+    		//saber si repeticio mas de una vez (hay 2 de ellos)
+    		if(veces_repetido_elemento_unico >= 2) {
+    			cantidad_repetidos++;
+    		}
+    	}
+    	
+        return cantidad_repetidos;
+    }
+
+    /**
+     * Compara el arreglo de enteros con otro arreglo de enteros y verifica si son iguales, es decir que contienen los mismos elementos exactamente en el mismo orden.
+     * @param otroArreglo El arreglo de enteros con el que se debe comparar
+     * @return True si los arreglos son idénticos y false de lo contrario
+     */
+    public boolean compararArregloEnteros( int[] otroArreglo )
+    {
+    	//suponemos que NO son iguales
+    	boolean son_iguales = false;
+    	//Hacemos el primer filtro por tamaño
+    	if(otroArreglo.length == arregloEnteros.length) {
+    		//Ahora pensamos distinto, suponemos que SÍ son iguales
+    		//Ahora lo que queremos es encontrar un caso donde sean distintos
+    		son_iguales = true;
+    		int i = 0;
+    		while(i<arregloEnteros.length && son_iguales == true) {
+    			int elemento_arreglo_1 = arregloEnteros[i];
+    			int elemento_arreglo_2 = otroArreglo[i];
+    			
+    			if(elemento_arreglo_1 != elemento_arreglo_2) {
+    				son_iguales = false;
+    			}
+    			i++;
+    		}
+    	}	
+        return son_iguales;
+    }
+
+    /**
+     * Compara el arreglo de enteros con otro arreglo de enteros y verifica que tengan los mismos elementos, aunque podría ser en otro orden.
+     * @param otroArreglo El arreglo de enteros con el que se debe comparar
+     * @return True si los elementos en los dos arreglos son los mismos
+     */
+    public boolean mismosEnteros(int[] otroArreglo) {
+        boolean mismosEnteros = true;
+
+        // Si no tienen la misma longitud, ya no pueden ser iguales
+        if (arregloEnteros.length != otroArreglo.length) {
+            mismosEnteros = false;
+        } else {
+            // Paso 1: contar frecuencia de cada número en arregloEnteros
+            int[] unicos1 = new int[arregloEnteros.length];
+            int[] freq1 = new int[arregloEnteros.length];
+            int count1 = 0;
+
+            for (int i = 0; i < arregloEnteros.length; i++) {
+                int elem = arregloEnteros[i];
+                int pos = 0;
+                while (pos < count1 && unicos1[pos] != elem) {
+                    pos++;
+                }
+                if (pos == count1) {
+                    unicos1[count1] = elem;
+                    freq1[count1] = 1;
+                    count1++;
+                } else {
+                    freq1[pos]++;
+                }
+            }
+
+            // Paso 2: contar frecuencia de cada número en otroArreglo
+            int[] unicos2 = new int[otroArreglo.length];
+            int[] freq2 = new int[otroArreglo.length];
+            int count2 = 0;
+
+            for (int i = 0; i < otroArreglo.length; i++) {
+                int elem = otroArreglo[i];
+                int pos = 0;
+                while (pos < count2 && unicos2[pos] != elem) {
+                    pos++;
+                }
+                if (pos == count2) {
+                    unicos2[count2] = elem;
+                    freq2[count2] = 1;
+                    count2++;
+                } else {
+                    freq2[pos]++;
+                }
+            }
+
+            // Paso 3: comparar listas de únicos y sus frecuencias
+            if (count1 != count2) {
+                mismosEnteros = false;
+            } else {
+                int i = 0;
+                while (i < count1 && mismosEnteros) {
+                    int elem = unicos1[i];
+                    int freq = freq1[i];
+
+                    int pos = 0;
+                    while (pos < count2 && unicos2[pos] != elem) {
+                        pos++;
+                    }
+
+                    if (pos == count2 || freq2[pos] != freq) {
+                        mismosEnteros = false;
+                    }
+                    i++;
+                }
+            }
+        }
+
+        return mismosEnteros;
+    }
+
+
+
+
+    /**
+     * Cambia los elementos del arreglo de enteros por una nueva serie de valores generada de forma aleatoria.
+     * 
+     * Para generar los valores se debe partir de una distribución uniforme usando Math.random().
+     * 
+     * Los números en el arreglo deben quedar entre el valor mínimo y el máximo.
+     * @param cantidad La cantidad de elementos que debe haber en el arreglo
+     * @param minimo El valor mínimo para los números generados
+     * @param maximo El valor máximo para los números generados
+     */
+    public void generarEnteros( int cantidad, int minimo, int maximo )
+    {
+    	int[] nueva_lista = new int[cantidad];
+    	for(int i = 0; i<cantidad; i++) {
+    		nueva_lista[i] = (int)(Math.random() * (maximo - minimo + 1)) + minimo; //Formula para hallar un entero entre dos numeros 
+
+    	}
+    	arregloEnteros = nueva_lista;
+    }
+
+}
