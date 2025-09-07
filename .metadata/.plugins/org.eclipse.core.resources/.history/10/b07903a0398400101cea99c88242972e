@@ -1,5 +1,0 @@
-package actividad_construir_uml;
-
-public class Constructora implements IParte { //usamos
-	private archivo
-}

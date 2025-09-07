@@ -4,6 +4,7 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="false"/>
 		<list key="findhistory">
+			<item value="TODO"/>
 			<item value="reini"/>
 			<item value="agregar"/>
 			<item value="volver"/>
@@ -18,7 +19,6 @@
 			<item value="verificar"/>
 			<item value="pintar"/>
 			<item value="darAlto"/>
-			<item value="array"/>
 		</list>
 	</section>
 </section>
